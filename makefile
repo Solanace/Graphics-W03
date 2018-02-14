@@ -21,5 +21,7 @@ matrix.o: matrix.c matrix.h
 
 run: main
 	./main
+
 clean:
 	rm *.o
+	rm main
