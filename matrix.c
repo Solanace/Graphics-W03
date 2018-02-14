@@ -12,15 +12,33 @@ Returns:
 print the matrix
 */
 void print_matrix(struct matrix *m) {
+	int r, c;
+	for (r = 0; r < m->rows; r ++) {
+		printf("[");
+		for (c = 0; c < m->cols; c ++) {
+			printf("%0.2f", m->m[r][c]);
+			if (c < m->cols - 1) {
+				printf(" ");
+			}
+		}
+		printf("]\n");
+	}
 }
 
 /*-------------- void ident() --------------
 Inputs:  struct matrix *m <-- assumes m is a square matrix
 Returns: 
 
-turns m in to an identity matrix
+turns m into an identity matrix
 */
 void ident(struct matrix *m) {
+	int r, c;
+	for (r = 0; r < m->rows; r ++) {
+		for (c = 0; c < m->cols; c ++) {
+			if (r == c)	m->m[r][c] = 1;
+			else m->m[r][c] = 0;
+		}
+	}
 }
 
 
@@ -94,7 +112,7 @@ Inputs:  struct matrix *m
 Returns: 
 
 Reallocates the memory for m->m such that it now has
-newcols number of collumns
+newcols number of columns
 ====================*/
 void grow_matrix(struct matrix *m, int newcols) {
   

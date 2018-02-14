@@ -14,8 +14,10 @@ int main() {
   struct matrix *edges;
 
   edges = new_matrix(4, 4);
+  ident(edges);
+  print_matrix(edges);
 
   draw_lines(edges, s, c);
-  display(s);
+  //display(s);
   free_matrix( edges );
 }
