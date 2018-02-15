@@ -2,9 +2,9 @@
 #define MATRIX_H
 
 struct matrix {
-  double **m;
-  int rows, cols;
-  int lastcol;
+	double **m;
+	int rows, cols;
+	int lastcol;
 } matrix;
 
 //Basic matrix manipulation routines
