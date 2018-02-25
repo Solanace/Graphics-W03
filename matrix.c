@@ -11,22 +11,25 @@ Returns:
 
 print the matrix
 */
+
 void print_matrix(struct matrix *m) {
 	int r, c;
-	int biggest = 0;
-	// Loop through to find the biggest number for formatting purposes
-	for (r = 0; r < m->rows; r ++) {
-		for (c = 0; c < m->cols; c ++) {
-			if (m->m[r][c] > biggest) biggest = m->m[r][c];
+	int count[m->cols]; // For each column, count stores the number of chars the biggest number takes
+	for (c = 0; c < m->cols; c ++) {
+		int tempA = 0;
+		for (r = 0; r < m->rows; r ++) {
+			if (m->m[r][c] > tempA) tempA = m->m[r][c];
+		}
+		int tempB = 0;
+		if (tempA == 0) count[c] = 1;
+		else {
+			while (tempA > 0) {
+				tempA = tempA / 10;
+				tempB ++;
+			}
+			count[c] = tempB;
 		}
 	}
-	printf("biggest = %d\n", biggest);
-	int count = 0;
-	while (biggest > 0) {
-		biggest = biggest / 10;
-		count ++;
-	}
-	printf("count = %d\n", count);
 	for (r = 0; r < m->rows; r ++) {
 		printf("[");
 		for (c = 0; c < m->cols; c ++) {
@@ -37,14 +40,15 @@ void print_matrix(struct matrix *m) {
 					temp = temp / 10;
 					ele_count ++;
 				}
-				while (count > ele_count) {
-					printf(" ");
-					ele_count ++;
-				}
+			}
+			else ele_count = 1;
+			while (count[c] > ele_count) {
+				printf(" ");
+				ele_count ++;
 			}
 			printf("%0.2f", m->m[r][c]);
 			if (c < m->cols - 1) {
-				printf(" ");
+				printf("  ");
 			}
 		}
 		printf("]\n");
@@ -77,6 +81,7 @@ a*b -> b
 
 void matrix_mult(struct matrix *a, struct matrix *b) {
 	struct matrix *m = new_matrix(a->rows, b->cols);
+	m->lastcol = b->lastcol;
 	int r, c;
 	for (r = 0; r < m->rows; r ++) {
 		for (c = 0; c < m->cols; c ++) {
@@ -94,8 +99,6 @@ void matrix_mult(struct matrix *a, struct matrix *b) {
 	}
 	*b = *m;
 }
-
-
 
 /*===============================================
   These Functions do not need to be modified

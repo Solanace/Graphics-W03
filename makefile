@@ -25,3 +25,4 @@ run: main
 clean:
 	rm *.o
 	rm main
+	rm matrix.png
