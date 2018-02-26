@@ -45,6 +45,7 @@ int main() {
 	color c;
 	struct matrix *edges, *trans;
 
+	clear_screen(s);
 	edges = new_matrix(4, 1);
 	trans = new_matrix(4, 4);
 	ident(trans);
