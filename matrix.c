@@ -69,6 +69,7 @@ void ident(struct matrix *m) {
 			else m->m[r][c] = 0;
 		}
 	}
+	m->lastcol = m->cols;
 }
 
 /*-------------- void matrix_mult() --------------
